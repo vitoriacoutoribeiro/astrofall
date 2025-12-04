@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://shmup2D/sprites/ship.png" type="Texture" id=1]
+[ext_resource path="res://shmup2D/sprites/Backgroud.png" type="Texture" id=2]
+[ext_resource path="res://scripts/ship.gd" type="Script" id=3]
+[ext_resource path="res://scenes/lazer.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ship"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="game" type="Node2D"]
+
+[node name="Backgroud" type="Sprite" parent="."]
+position = Vector2( 124.363, 99.0206 )
+texture = ExtResource( 2 )
+
+[node name="ship" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="ship" type="Sprite" parent="ship"]
+position = Vector2( 116.209, 169.16 )
+texture = ExtResource( 1 )
+hframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ship/ship"]
+autoplay = "ship"
+anims/ship = SubResource( 1 )
+
+[node name="lazer" parent="ship" instance=ExtResource( 4 )]
+position = Vector2( 116.239, 154.697 )
